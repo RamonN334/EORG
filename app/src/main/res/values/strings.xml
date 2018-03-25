@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">EORG</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_category_one">IMPORTANT\nURGENT</string>
+    <string name="title_category_two">IMPORTANT\nNOT URGENT</string>
+    <string name="title_category_third">URGENT\nNOT IMPORTANT</string>
+    <string name="title_category_fourth">NOT URGENT\nNOT IMPORTANT</string>
+    <string name="tasks">Tasks</string>
+</resources>
