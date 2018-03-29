@@ -9,7 +9,6 @@ import android.view.View
 import android.view.View.*
 import android.widget.TextView
 import com.siteam.eorg.DB.DBHelper
-import com.siteam.eorg.Utils.TextViewEx
 
 class MainActivity : Activity(), OnClickListener {
     private lateinit var tvTaskCount: Array<TextView>
@@ -27,7 +26,10 @@ class MainActivity : Activity(), OnClickListener {
                 findViewById(R.id.taskCount3),
                 findViewById(R.id.taskCount4))
 
-
+        for (i: Int in 0 until tvTaskCount.size) {
+            tvTaskCount[i].typeface = tf
+            tvTaskCount[i].text = dbHelper.getTasksCountById(i + 1).toString()
+        }
 
         lCatLayouts = arrayOf(findViewById(R.id.lCat1),
                 findViewById(R.id.lCat2),
@@ -38,11 +40,16 @@ class MainActivity : Activity(), OnClickListener {
             lCatLayouts[i].setOnClickListener(this)
         }
 
+        dbHelper.close()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val dbHelper = DBHelper(this)
         for (i: Int in 0 until tvTaskCount.size) {
-            tvTaskCount[i].typeface = tf
             tvTaskCount[i].text = dbHelper.getTasksCountById(i + 1).toString()
         }
-
         dbHelper.close()
     }
 
@@ -51,19 +58,19 @@ class MainActivity : Activity(), OnClickListener {
         val intent = Intent(this, CategoryActivity::class.java)
         when (v?.id) {
             R.id.lCat1 -> {
-                intent.putExtra("catId", 1)
+                intent.putExtra("catId", "1")
                 intent.putExtra("tasksCount", dbHelper.getTasksCountById(1))
             }
             R.id.lCat2 -> {
-                intent.putExtra("catId", 2)
+                intent.putExtra("catId", "2")
                 intent.putExtra("tasksCount", dbHelper.getTasksCountById(2))
             }
             R.id.lCat3 -> {
-                intent.putExtra("catId", 3)
+                intent.putExtra("catId", "3")
                 intent.putExtra("tasksCount", dbHelper.getTasksCountById(3))
             }
             R.id.lCat4 -> {
-                intent.putExtra("catId", 4)
+                intent.putExtra("catId", "4")
                 intent.putExtra("tasksCount", dbHelper.getTasksCountById(4))
             }
         }

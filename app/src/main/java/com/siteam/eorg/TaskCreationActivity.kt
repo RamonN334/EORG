@@ -8,15 +8,15 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import android.view.View.*
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.TextView
-import android.widget.TimePicker
+import android.widget.*
+import com.siteam.eorg.DB.DBHelper
 import com.siteam.eorg.Utils.Task
 import java.util.*
 
 class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetListener {
 
+    lateinit var etTitle: EditText
+    lateinit var etDesciption: EditText
     lateinit var tvChosenDate: TextView
 
     lateinit var btnCngDate: Button
@@ -25,13 +25,16 @@ class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetList
 
     lateinit var dateTime: Calendar
 
-    lateinit var task: Task
+    private lateinit var task: Task
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_creation)
 
+        etTitle = findViewById(R.id.etTitle) as EditText
+        etDesciption = findViewById(R.id.etDesciption) as EditText
         tvChosenDate = findViewById(R.id.chosenDate) as TextView
+
         btnCngDate = findViewById(R.id.btnChgDate) as Button
         btnCngDate.setOnClickListener(this)
 
@@ -42,13 +45,24 @@ class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetList
         btnOk.setOnClickListener(this)
 
         dateTime = Calendar.getInstance()
+        initDate()
+
         task = Task(this.intent.getStringExtra("catId"))
-        InitDate()
+        task.creationTime = tvChosenDate.text.toString()
 
     }
 
-    fun checkParam() {
+    private fun getParamsFromView(): Boolean {
+        task.title = etTitle.text.toString()
+        task.description = etDesciption.text.toString()
+        task.expirationTime = tvChosenDate.text.toString()
 
+        return !(task.title.equals(""))
+    }
+
+    private fun printError() {
+        val tvError = findViewById(R.id.tvError) as TextView
+        tvError.text = getString(R.string.emptyFieldError)
     }
 
     override fun onClick(v: View?) {
@@ -60,7 +74,15 @@ class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetList
                 finish()
             }
             R.id.btnOk -> {
-                finish()
+                if (getParamsFromView()) {
+                    val dbHelper = DBHelper(this)
+                    dbHelper.insertTask(task)
+                    dbHelper.close()
+                    finish()
+                }
+                else {
+                    printError()
+                }
             }
         }
     }
@@ -69,10 +91,10 @@ class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetList
         dateTime.set(Calendar.YEAR, year)
         dateTime.set(Calendar.MONTH, month)
         dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-        InitDate()
+        initDate()
     }
 
-    private fun InitDate() {
+    private fun initDate() {
         tvChosenDate.text = DateUtils.formatDateTime(this, dateTime.timeInMillis,
                 DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_YEAR)
     }

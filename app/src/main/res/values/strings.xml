@@ -6,4 +6,5 @@
     <string name="title_category_third">URGENT\nNOT IMPORTANT</string>
     <string name="title_category_fourth">NOT URGENT\nNOT IMPORTANT</string>
     <string name="tasks">Tasks</string>
+    <string name="emptyFieldError">Field should not be empty</string>
 </resources>

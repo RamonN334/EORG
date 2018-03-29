@@ -1,21 +1,20 @@
 package com.siteam.eorg.DB
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+import com.siteam.eorg.Utils.Task
 
 /**
  * Created by Igor on 20.02.2018.
  */
 class DBHelper(context: Context): SQLiteOpenHelper(context, "myDB", null, 1) {
-    private val CATEGORY_TABLE: String = "Categories"
-    private val TASK_TABLE: String = "Tasks"
-    private var db: SQLiteDatabase
-
-    init {
-        this.db = this.writableDatabase
-    }
+    private val CATEGORY_TABLE = "Categories"
+    private val TASK_TABLE = "Tasks"
+    private val db: SQLiteDatabase = writableDatabase
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL("create table " + CATEGORY_TABLE + "(" +
@@ -30,13 +29,19 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "myDB", null, 1) {
                 "FOREIGN KEY(CatId) REFERENCES " + CATEGORY_TABLE + "(Id)" + ");")
     }
 
-    fun getTasksCountById(id: Int): Int {
-        var c: Cursor
-        c = db.query(TASK_TABLE, null, "catId = ?", arrayOf(id.toString()), null, null, null)
-        return c.count
+    fun insertTask(t: Task) {
+        val cv = ContentValues()
+        cv.put("Title", t.title)
+        cv.put("Description", t.description)
+        cv.put("CreationTime", t.creationTime)
+        cv.put("ExpirationTime", t.expirationTime)
+        cv.put("CatId", t.catId)
+        db.insert(TASK_TABLE, null, cv)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    fun getTasksCountById(id: Int): Int = db.query(TASK_TABLE, null,
+                                            "catId = ?", arrayOf(id.toString()),
+                                            null, null, null).count
+
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
 }
