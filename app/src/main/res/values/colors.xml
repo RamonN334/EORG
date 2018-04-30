@@ -11,4 +11,6 @@
     <color name="colorTextCat2">#E8F5E9</color>
     <color name="colorTextCat3">#E8EAF6</color>
     <color name="colorTextCat4">#ECEFF1</color>
+    <color name="white">#FFFFFF</color>
+    <color name="whiteish">#FAFAFA</color>
 </resources>

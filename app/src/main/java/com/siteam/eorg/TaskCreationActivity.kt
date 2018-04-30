@@ -2,7 +2,6 @@ package com.siteam.eorg
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.*
-import android.app.TimePickerDialog.*
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateUtils
@@ -11,18 +10,10 @@ import android.view.View.*
 import android.widget.*
 import com.siteam.eorg.DB.DBHelper
 import com.siteam.eorg.Utils.Task
+import kotlinx.android.synthetic.main.activity_task_creation.*
 import java.util.*
 
 class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetListener {
-
-    lateinit var etTitle: EditText
-    lateinit var etDesciption: EditText
-    lateinit var tvChosenDate: TextView
-
-    lateinit var btnCngDate: Button
-    lateinit var btnCancel: Button
-    lateinit var btnOk: Button
-
     lateinit var dateTime: Calendar
 
     private lateinit var task: Task
@@ -31,37 +22,27 @@ class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_creation)
 
-        etTitle = findViewById(R.id.etTitle) as EditText
-        etDesciption = findViewById(R.id.etDesciption) as EditText
-        tvChosenDate = findViewById(R.id.chosenDate) as TextView
-
-        btnCngDate = findViewById(R.id.btnChgDate) as Button
-        btnCngDate.setOnClickListener(this)
-
-        btnCancel = findViewById(R.id.btnCancel) as Button
+        btnChgDate.setOnClickListener(this)
         btnCancel.setOnClickListener(this)
-
-        btnOk = findViewById(R.id.btnOk) as Button
         btnOk.setOnClickListener(this)
 
         dateTime = Calendar.getInstance()
         initDate()
 
         task = Task(this.intent.getStringExtra("catId"))
-        task.creationTime = tvChosenDate.text.toString()
+        task.creationTime = chosenDate.text.toString()
 
     }
 
     private fun getParamsFromView(): Boolean {
         task.title = etTitle.text.toString()
         task.description = etDesciption.text.toString()
-        task.expirationTime = tvChosenDate.text.toString()
+        task.expirationTime = chosenDate.text.toString()
 
         return !(task.title.equals(""))
     }
 
     private fun printError() {
-        val tvError = findViewById(R.id.tvError) as TextView
         tvError.text = getString(R.string.emptyFieldError)
     }
 
@@ -95,7 +76,7 @@ class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetList
     }
 
     private fun initDate() {
-        tvChosenDate.text = DateUtils.formatDateTime(this, dateTime.timeInMillis,
+        chosenDate.text = DateUtils.formatDateTime(this, dateTime.timeInMillis,
                 DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_YEAR)
     }
 
