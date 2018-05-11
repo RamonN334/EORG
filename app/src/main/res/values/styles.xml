@@ -6,9 +6,31 @@
     </style>
 
     <style name="app_btn">
+        <item name="android:stateListAnimator">@animator/button_pressed</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:elevation">2dp</item>
-        <item name="android:background">@color/whiteish</item>
+        <item name="android:background">@drawable/button_bg</item>
+    </style>
+
+    <style name="main_activity_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="task_count_text" parent="main_activity_text">
+        <item name="android:textSize">36sp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="category_title_text" parent="main_activity_text">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="task_text" parent="main_activity_text">
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

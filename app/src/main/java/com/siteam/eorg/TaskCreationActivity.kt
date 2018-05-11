@@ -29,7 +29,7 @@ class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetList
         dateTime = Calendar.getInstance()
         initDate()
 
-        task = Task(this.intent.getStringExtra("catId"))
+        task = Task(intent.getStringExtra("catId"))
         task.creationTime = chosenDate.text.toString()
 
     }
@@ -43,17 +43,13 @@ class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetList
     }
 
     private fun printError() {
-        tvError.text = getString(R.string.emptyFieldError)
+        tvError.text = R.string.emptyFieldError.toString()
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btnChgDate -> {
-                setDate()
-            }
-            R.id.btnCancel -> {
-                finish()
-            }
+            R.id.btnChgDate -> setDate()
+            R.id.btnCancel -> finish()
             R.id.btnOk -> {
                 if (getParamsFromView()) {
                     val dbHelper = DBHelper(this)
@@ -61,9 +57,7 @@ class TaskCreationActivity : AppCompatActivity(), OnClickListener, OnDateSetList
                     dbHelper.close()
                     finish()
                 }
-                else {
-                    printError()
-                }
+                else printError()
             }
         }
     }

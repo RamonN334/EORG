@@ -1,21 +1,22 @@
 package com.siteam.eorg
 
+import android.app.ListActivity
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import com.siteam.eorg.DB.DBHelper
 import com.siteam.eorg.Utils.Task
+import kotlinx.android.synthetic.main.activity_category.*
 
-class CategoryActivity : AppCompatActivity(), OnClickListener {
+class CategoryActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     lateinit var dbHelper: DBHelper
     private lateinit var catId: String
     private lateinit var rvData: RecyclerView
@@ -27,8 +28,11 @@ class CategoryActivity : AppCompatActivity(), OnClickListener {
 
         catId = intent.getStringExtra("catId")
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener(this)
+        fab.setOnClickListener {
+            val intent = Intent(this, TaskCreationActivity::class.java)
+            intent.putExtra("catId", catId)
+            startActivity(intent)
+        }
 
         rvData = findViewById(R.id.rvData)
         tvAdd = findViewById(R.id.tvAdd)
@@ -46,27 +50,26 @@ class CategoryActivity : AppCompatActivity(), OnClickListener {
         if (dbHelper.getTasksCountById(catId) > 0) {
             rvData.layoutManager = LinearLayoutManager(this)
             rvData.visibility = View.VISIBLE
-            tvAdd.visibility = View.INVISIBLE
+            tvAdd.visibility = View.GONE
             rvData.adapter = TaskViewAdapter(dbHelper.getTasksById(catId))
         }
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.fab -> {
-                val intent = Intent(this, TaskCreationActivity::class.java)
-                intent.putExtra("catId", catId)
-                startActivity(intent)
-            }
-        }
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        startActivity(Intent(this, TaskCreationActivity::class.java))
     }
 
-    class TaskViewAdapter(private val tasks: Array<Task>): RecyclerView.Adapter<TaskViewAdapter.ViewHolder>() {
+    class TaskViewAdapter(
+            private val tasks: Array<Task>,
+            private val mListener: RecyclerViewClickListener):
+            RecyclerView.Adapter<TaskViewAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
             val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.task_item, parent, false)
-            return ViewHolder(itemView)
+            return ViewHolder(itemView, mListener)
         }
+
+
 
         override fun getItemCount() = tasks.size
 
@@ -78,20 +81,24 @@ class CategoryActivity : AppCompatActivity(), OnClickListener {
             holder?.expDate?.text = tasks[position].expirationTime
         }
 
-        override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
-            super.onAttachedToRecyclerView(recyclerView)
-        }
-
-        class ViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView) {
-            var cv: CardView? = null
-            var taskTitle: TextView? = null
-            var expDate: TextView? = null
+        class ViewHolder(itemView: View?,
+                         private val mListener: RecyclerViewClickListener):
+                RecyclerView.ViewHolder(itemView),
+                View.OnClickListener {
+            var taskTitle: TextView? = itemView?.findViewById(R.id.itTaskTitle)
+            var expDate: TextView? = itemView?.findViewById(R.id.itExpDate)
 
             init {
-                cv = itemView?.findViewById(R.id.cvItem)
-                taskTitle = itemView?.findViewById(R.id.itTaskTitle)
-                expDate = itemView?.findViewById(R.id.itExpDate)
+                itemView?.setOnClickListener(this)
+            }
+
+            override fun onClick(v: View) {
+                mListener.onClick(v, adapterPosition)
+                Log.d("myLogs", "item pressed")
             }
         }
+    }
+    interface RecyclerViewClickListener {
+        fun onClick(v: View, position: Int)
     }
 }

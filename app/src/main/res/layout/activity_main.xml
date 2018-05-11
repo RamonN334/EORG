@@ -24,50 +24,34 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.siteam.eorg.Utils.TextViewEx
+            <TextView
                 android:id="@+id/tvCat1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                style="@style/category_title_text"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/title_category_one"
-                android:textAlignment="center"
-                android:textAllCaps="true"
                 android:textColor="@color/colorTextCat1"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/taskCount1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="12"
-                android:textAlignment="center"
+                style="@style/task_count_text"
                 android:textColor="@color/colorTextCat1"
-                android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.siteam.eorg.Utils.TextViewEx
+            <TextView
                 android:id="@+id/tvCases1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/task_text"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:text="@string/tasks"
-                android:textAlignment="center"
                 android:textColor="@color/colorTextCat1"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/taskCount1" />
@@ -85,49 +69,34 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.siteam.eorg.Utils.TextViewEx
+            <TextView
                 android:id="@+id/tvCat2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                style="@style/category_title_text"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/title_category_two"
-                android:textAlignment="center"
-                android:textAllCaps="true"
                 android:textColor="@color/colorTextCat2"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/taskCount2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:textAlignment="center"
+                style="@style/task_count_text"
                 android:textColor="@color/colorTextCat2"
-                android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.siteam.eorg.Utils.TextViewEx
+            <TextView
                 android:id="@+id/tvCases2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/task_text"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:text="@string/tasks"
-                android:textAlignment="center"
                 android:textColor="@color/colorTextCat2"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/taskCount2" />
@@ -138,7 +107,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/lCat3"
@@ -153,47 +123,32 @@
 
             <TextView
                 android:id="@+id/tvCat3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                style="@style/category_title_text"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/title_category_third"
-                android:textAlignment="center"
-                android:textAllCaps="true"
                 android:textColor="@color/colorTextCat3"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/taskCount3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:textAlignment="center"
+                style="@style/task_count_text"
                 android:textColor="@color/colorTextCat3"
-                android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.siteam.eorg.Utils.TextViewEx
+            <TextView
                 android:id="@+id/tvCases3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/task_text"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:text="@string/tasks"
-                android:textAlignment="center"
                 android:textColor="@color/colorTextCat3"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/taskCount3" />
@@ -212,47 +167,32 @@
 
             <TextView
                 android:id="@+id/tvCat4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                style="@style/category_title_text"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/title_category_fourth"
-                android:textAlignment="center"
-                android:textAllCaps="true"
                 android:textColor="@color/colorTextCat4"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/taskCount4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:textAlignment="center"
+                style="@style/task_count_text"
                 android:textColor="@color/colorTextCat4"
-                android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.siteam.eorg.Utils.TextViewEx
+            <TextView
                 android:id="@+id/tvCases4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/task_text"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:text="@string/tasks"
-                android:textAlignment="center"
                 android:textColor="@color/colorTextCat4"
-                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/taskCount4" />

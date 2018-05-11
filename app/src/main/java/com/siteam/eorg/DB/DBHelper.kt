@@ -50,11 +50,11 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, "myDB", null, 1) {
         var tasks: Array<Task> = arrayOf()
         if (cursor.moveToFirst()) {
             do {
-                val task = Task(cursor.getString(cursor.getColumnIndex("Title")),
-                        cursor.getString(cursor.getColumnIndex("Description")),
-                        cursor.getString(cursor.getColumnIndex("CreationTime")),
-                        cursor.getString(cursor.getColumnIndex("ExpirationTime")),
-                        cursor.getString(cursor.getColumnIndex("CatId")))
+                val task = Task(cursor.getString(cursor.getColumnIndex("title")),
+                        cursor.getString(cursor.getColumnIndex("description")),
+                        cursor.getString(cursor.getColumnIndex("creationTime")),
+                        cursor.getString(cursor.getColumnIndex("expirationTime")),
+                        cursor.getString(cursor.getColumnIndex("catId")))
                 tasks += task
             }
             while (cursor.moveToNext())
